@@ -1,49 +1,62 @@
 import logoDark from "./logo-dark.svg";
 import logoLight from "./logo-light.svg";
+import logopro from "./profile_LE.jpg";
 
 export function Welcome() {
   return (
     <main className="flex items-center justify-center pt-16 pb-4">
       <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
-        <header className="flex flex-col items-center gap-9">
-          <div className="w-[500px] max-w-[100vw] p-4">
-            <img
-              src={logoLight}
-              alt="React Router"
-              className="block w-full dark:hidden"
-            />
-            <img
-              src={logoDark}
-              alt="React Router"
-              className="hidden w-full dark:block"
-            />
+
+        {/* HERO CARD */}
+        <div className="flex flex-col items-center gap-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl shadow-lg p-10 max-w-lg w-full mx-4">
+          
+          {/* Photo */}
+          <img
+            src={logopro}
+            alt="Lucas EECKHOUTTE"
+            className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
+          />
+
+          {/* Nom */}
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            Lucas EECKHOUTTE
+          </h1>
+
+          {/* Titre */}
+          <p className="text-blue-600 dark:text-blue-400 font-medium text-lg">
+            New developer !
+          </p>
+
+          {/* Description */}
+          <p className="text-gray-600 dark:text-gray-300 text-center leading-relaxed">
+            I'm a new developer studying at Epitech. I love computer and new tech ! What else do I like ? I love read, write a book and video games ! Welcome to my portfolio !
+          </p>
+
+          {/* Boutons */}
+          <div className="flex gap-4">
+            <a
+              href="/projects"
+              className="px-6 py-2 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+            >
+              My projects
+            </a>
+            <a
+              href="/contact"
+              className="px-6 py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+            >
+              ...
+            </a>
           </div>
-        </header>
-        <div className="max-w-[300px] w-full space-y-6 px-4">
-          <nav className="rounded-3xl border border-gray-200 p-6 dark:border-gray-700 space-y-4">
-            <p className="leading-6 text-gray-700 dark:text-gray-200 text-center">
-              What&apos;s next?
-            </p>
-            <ul>
-              {resources.map(({ href, text, icon }) => (
-                <li key={href}>
-                  <a
-                    className="group flex items-center gap-3 self-stretch p-3 leading-normal text-blue-700 hover:underline dark:text-blue-500"
-                    href={href}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {icon}
-                    {text}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+
         </div>
+
       </div>
     </main>
   );
+}
+const user = {
+  name: "Lucas EECKHOUTTE",
+  imageSize: 90,
 }
 
 const resources = [
