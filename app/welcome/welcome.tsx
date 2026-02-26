@@ -1,38 +1,126 @@
-import logoDark from "./logo-dark.svg";
-import logoLight from "./logo-light.svg";
+import { useRef } from "react";
 import logopro from "./profile_LE.jpg";
+import { motion, useScroll, useTransform } from "framer-motion";
+
+type ProjectItem = {
+  id: string;
+  title: string;
+  description: string;
+  image: string;
+  link: string;
+};
+
+const items: ProjectItem[] = [
+  {
+    id: "plateaus",
+    title: "The Plateaus",
+    description: "A mod for the famous game Terraria.",
+    image: "test",
+    link: "https://github.com/Tadomika-Ari/The-Plateaus",
+  },
+  {
+    id: "jarvis",
+    title: "JARVIS IA",
+    description: "Assistant IA for help you for... all",
+    image: "test",
+    link: "https://github.com/Tadomika-Ari/JARVIS",
+  },
+  {
+    id: "project-3",
+    title: "M4RV1N Bot",
+    description: "A simple bot discord",
+    image: "test",
+    link: "https://github.com/Tadomika-Ari/M4RV1N-Bot",
+  },
+];
+
+function ProjectsScroller() {
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  // Déplace la rangée vers la gauche pendant le scroll.
+  // Ajuste "-75%" selon le nombre de cartes (ex: -50%, -120%, etc.)
+  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-75%"]);
+
+  return (
+    <section ref={containerRef} className="w-full h-[250vh]">
+      <div className="sticky top-0 h-screen overflow-hidden px-4">
+        <div className="mx-auto max-w-6xl pt-10">
+          <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-white">
+            My projects :
+          </h2>
+        </div>
+
+        <motion.div style={{ x }} className="mt-10 flex gap-6 px-4">
+          {items.map((item) => (
+            <article key={item.id} className="shrink-0 w-[280px] sm:w-[340px] md:w-[420px] rounded-3xl border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 p-6 shadow-lg">
+              {/* Image */}
+              <div className="h-44 w-full bg-gray-100 dark:bg-gray-900">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <h3 className="text-center text-xl font-semibold text-gray-900 dark:text-white">
+                {item.title}
+              </h3>
+              <p className="mt-2 text-gray-600 dark:text-gray-300">
+                {item.description}
+              </p>
+              {/* Buttons / links */}
+                {item.link && (
+                  <div className="mt-4 text-center gap-3">
+                    {item.link && (
+                      <a
+                        href={item.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-4 py-2 rounded-xl bg-blue-600 text-white hover:bg-blue-700 transition">
+                        Github
+                      </a>
+                    )}
+                  </div>
+                )}
+            </article>
+          ))}
+        </motion.div>
+      </div>
+    </section>
+  );
+}
 
 export function Welcome() {
   return (
-    <main className="flex items-center justify-center pt-16 pb-4">
-      <div className="flex-1 flex flex-col items-center gap-16 min-h-0">
-
+    <main className="pt-16 pb-4">
+      <div className="flex flex-col items-center gap-16">
         {/* HERO CARD */}
         <div className="flex flex-col items-center gap-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl shadow-lg p-10 max-w-lg w-full mx-4">
-          
-          {/* Photo */}
           <img
             src={logopro}
             alt="Lucas EECKHOUTTE"
             className="w-32 h-32 rounded-full object-cover border-4 border-blue-500"
           />
 
-          {/* Nom */}
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
             Lucas EECKHOUTTE
           </h1>
 
-          {/* Titre */}
           <p className="text-blue-600 dark:text-blue-400 font-medium text-lg">
             New developer !
           </p>
 
-          {/* Description */}
           <p className="text-gray-600 dark:text-gray-300 text-center leading-relaxed">
-            I'm a new developer studying at Epitech. I love computer and new tech ! What else do I like ? I love read, write a book and video games ! Welcome to my portfolio !
+            I'm a new developer studying at Epitech. I love computer and new tech !
+            What else do I like ? I love read, write a book and video games !
+            Welcome to my portfolio !
           </p>
 
-          {/* Boutons */}
           <div className="flex gap-4">
             <a
               href="/projects"
@@ -47,37 +135,14 @@ export function Welcome() {
               ...
             </a>
           </div>
-
         </div>
 
+        {/* SECTION HORIZONTAL SCROLL */}
+        <ProjectsScroller />
+        <div className="flex flex-col items-center gap-6 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-3xl shadow-lg p-10 max-w-lg w-full mx-4">
+          Test
+        </div>
       </div>
     </main>
   );
 }
-const user = {
-  name: "Lucas EECKHOUTTE",
-  imageSize: 90,
-}
-
-const resources = [
-  {
-    href: "https://reactrouter.com/docs",
-    text: "React Router Docs",
-    icon: (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        className="stroke-gray-600 group-hover:stroke-current dark:stroke-gray-300"
-      >
-        <path
-          d="M9.99981 10.0751V9.99992M17.4688 17.4688C15.889 19.0485 11.2645 16.9853 7.13958 12.8604C3.01467 8.73546 0.951405 4.11091 2.53116 2.53116C4.11091 0.951405 8.73546 3.01467 12.8604 7.13958C16.9853 11.2645 19.0485 15.889 17.4688 17.4688ZM2.53132 17.4688C0.951566 15.8891 3.01483 11.2645 7.13974 7.13963C11.2647 3.01471 15.8892 0.951453 17.469 2.53121C19.0487 4.11096 16.9854 8.73551 12.8605 12.8604C8.73562 16.9853 4.11107 19.0486 2.53132 17.4688Z"
-          strokeWidth="1.5"
-          strokeLinecap="round"
-        />
-      </svg>
-    ),
-  },
-];
