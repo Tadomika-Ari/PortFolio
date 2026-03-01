@@ -21,11 +21,11 @@ const items: ProjectItem[] = [
     link: "https://github.com/Tadomika-Ari/The-Plateaus",
   },
   {
-    id: "jarvis",
-    title: "JARVIS IA",
+    id: "epidos",
+    title: "Epi-Dos",
     description: "Assistant IA for help you for... all",
     image: "test",
-    link: "https://github.com/Tadomika-Ari/JARVIS",
+    link: "https://github.com/Tadomika-Ari/Epi-Dos",
   },
   {
     id: "project-3",
